@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZyroNetwork | Ultimate Bedrock Minigames</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00b4d8; /* Neon/Cyan Zyro accent */
+            --secondary-color: #90e0ef;
+            --bg-dark: #0b0c10;
+            --bg-card: #1f2833;
+            --text-light: #c5a059; /* Gold accents */
+            --text-main: #ffffff;
+            --text-muted: #c5a880; /* Secondary text color */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image: linear-gradient(rgba(11, 12, 16, 0.85), rgba(11, 12, 16, 0.95)), url('https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1920'); /* Dark gaming background fallback */
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: rgba(31, 40, 51, 0.75);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 60px 20px;
+        }
+
+        .tagline {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            background: rgba(0, 180, 216, 0.1);
+            padding: 6px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 180, 216, 0.3);
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+            text-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
+        }
+
+        header p {
+            max-width: 600px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #a9b3c4;
+            margin-bottom: 40px;
+        }
+
+        /* --- BUTTONS --- */
+        .cta-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--bg-dark);
+            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 180, 216, 0.6);
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(0, 180, 216, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* --- GAME MODES FEATURE SECTION --- */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 60px 0 40px 0;
+            position: relative;
+        }
+
+        .section-title span {
+            color: var(--primary-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 35px 25px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--primary-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border-color: rgba(0, 180, 216, 0.3);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: #a9b3c4;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* --- UTILITY CONSOLE BAR (IP & Status) --- */
+        .status-bar {
+            background: rgba(31, 40, 51, 0.6);
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .ip-display {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #a9b3c4;
+        }
+
+        .ip-display span {
+            color: var(--primary-color);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin-left: 5px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #2ec4b6; /* Live Green */
+            border-radius: 50%;
+            box-shadow: 0 0 10px #2ec4b6;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+            font-size: 0.85rem;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- RULES MODAL SYSTEM --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background-color: var(--bg-card);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-box h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .rules-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .rules-list li {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #a9b3c4;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .rules-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .close-modal-btn {
+            background-color: var(--primary-color);
+            color: var(--bg-dark);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+
+        .close-modal-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.3rem; }
+            nav { padding: 15px 5%; }
+            .nav-links { display: none; } /* Kept clean for simple setup */
+            .status-bar { flex-direction: column; text-align: center; width: 90%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Zyro<span>Network</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a onclick="openRules()">Server Rules</a></li>
+            <li><a href="YOUR_DISCORD_INVITE_PLACEHOLDER" target="_blank">Discord Support</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="tagline">The Ultimate Native Bedrock Experience</div>
+        <h1>A Complete Remake of <span>NetherGames</span></h1>
+        <p>
+            Welcome to ZyroNetwork. Built entirely native from the ground up for elite performance. No external Java packet translation layers, no input delays—just hyper-responsive, high-fidelity competitive gameplay tailored for Bedrock players.
+        </p>
+
+        <div class="cta-container">
+            <a href="minecraft://connect?url=YOUR_IP_PLACEHOLDER&port=YOUR_PORT_PLACEHOLDER" class="btn btn-primary">⚡ Launch & Join Network</a>
+            <button class="btn btn-secondary" onclick="openRules()">📋 Read Rules & Info</button>
+        </div>
+    </header>
+
+    <div class="status-bar">
+        <div class="ip-display">IP: <span>YOUR_IP_PLACEHOLDER</span> &nbsp; Port: <span>YOUR_PORT_PLACEHOLDER</span></div>
+        <div class="status-indicator">
+            <div class="dot"></div>
+            <span id="player-count">Network Online | Placeholder Players Connected</span>
+        </div>
+    </div>
+
+    <h2 class="section-title">Explore Our <span>Game Modes</span></h2>
+    <div class="features-grid">
+        
+        <div class="card">
+            <div class="card-icon">🛏️</div>
+            <h3>Bedwars</h3>
+            <p>Protect your core foundation while annihilating enemy bases. Experience native custom FormAPI villager shops, balanced team upgrades, and perfectly fluid block placement.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🌉</div>
+            <h3>The Bridge / Practice</h3>
+            <p>Master your jump-bridging, speed-bridging, and clutch mechanics. Features low-resource instant void-teleports and frame-perfect block tracking to optimize your muscle memory.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h3>Skywars</h3>
+            <p>Spawn on an isolated island, loot specialized tactical chests, and fight your way to the central node. Fine-tuned knockback maps guarantee fair fights across all Bedrock platforms.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        &copy; 2026 ZyroNetwork. This platform is an independent competitive development remake project and is not affiliated with Mojang Studios or NetherGames.
+    </footer>
+
+    <div class="modal-overlay" id="rulesModal">
+        <div class="modal-box">
+            <h2>ZyroNetwork Rules</h2>
+            <ul class="rules-list">
+                <li><strong>No Unfair Advantage Client Software:</strong> The deployment of specialized movement exploits, auto-clickers, or tracking overlays is strictly blocked by our active configuration layer.</li>
+                <li><strong>Maintain Competitive Integrity:</strong> Cross-teaming in single-player arenas or intentionally throwing objectives to benefit external groups will result in immediate system restrictions.</li>
+                <li><strong>Respect the Lobby Spaces:</strong> Keep general chat channels clear of toxic communication or systemic disruption. Let's build a clean competitive ecosystem.</li>
+                <li><strong>Exploit Reporting Protocol:</strong> If you uncover an infrastructure bug or mapping vulnerability, notify developers via our Discord environment immediately rather than exploiting it.</li>
+            </ul>
+            <button class="close-modal-btn" onclick="closeRules()">I Understand, Let's Play</button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('rulesModal');
+
+        function openRules() {
+            modal.classList.add('active');
+        }
+
+        function closeRules() {
+            modal.classList.remove('active');
+        }
+
+        // Close modal if user clicks outside the inner box content area
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeRules();
+            }
+        });
+    </script>
+</body>
+</html>
